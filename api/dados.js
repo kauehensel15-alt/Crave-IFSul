@@ -21,6 +21,7 @@ function dataBR(d) {
   return `${g('day')}/${g('month')}/${g('year')}`;
 }
 function anaUrl(codigo, agora) {
+  // Mesmo formato testado em 10/10/2026: de ontem até amanhã
   const ini = new Date(agora.getTime() - 864e5), fim = new Date(agora.getTime() + 864e5);
   return `${ANA_URL}?codEstacao=${codigo}&dataInicio=${dataBR(ini)}&dataFim=${dataBR(fim)}`;
 }
@@ -64,8 +65,8 @@ function resumir(regs, codigo) {
     chuva24hMm: chuvas.length ? +chuvas.reduce((s, r) => s + r.chuva, 0).toFixed(1) : null,
   };
 }
-async function buscar(url, comoJson) {
-  const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 8000);
+async function buscar(url, comoJson, limiteMs = 8000) {
+  const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), limiteMs);
   try {
     const r = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': 'CRAVE/1.0 (projeto academico IFSul Lajeado)' } });
     if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -76,9 +77,10 @@ const erroTxt = (e) => String((e && e.cause && e.cause.code) || (e && e.message)
 
 async function lerRio(agora) {
   return Promise.all(ESTACOES.map(async (e) => {
-    const url = anaUrl(e.codigo, agora);
-    try { return { ...e, fonteUrl: url, ...resumir(lerXml(await buscar(url)), e.codigo) }; }
-    catch (err) { return { ...e, fonteUrl: url, ok: false, motivo: 'fonte_inacessivel', erro: erroTxt(err) }; }
+    const url = anaUrl(e.codigo, agora); const t0 = Date.now();
+    // A ANA costuma ser lenta: espera até 25 s
+    try { const xml = await buscar(url, false, 25000); return { ...e, fonteUrl: url, duracaoMs: Date.now() - t0, ...resumir(lerXml(xml), e.codigo) }; }
+    catch (err) { return { ...e, fonteUrl: url, duracaoMs: Date.now() - t0, ok: false, motivo: 'fonte_inacessivel', erro: erroTxt(err) }; }
   }));
 }
 async function lerAvisos() {
