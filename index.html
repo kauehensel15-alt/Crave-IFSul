@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRAVE · Lajeado</title>
+<meta name="description" content="Nível do Rio Taquari, avisos e telefones de emergência para Lajeado e Vale do Taquari, com links para as fontes oficiais.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F5F6; --surface:#FFFFFF; --ink:#13202A; --muted:#566673; --line:#D6DDE2;
+  --rio:#0A6C8F; --rio-soft:#E2F0F5;
+  --normal:#2E7D4F; --atencao:#B7791F; --alerta:#C2410C; --inundacao:#B91C1C;
+  --atencao-bg:#FDF3E1; --alerta-bg:#FDE9DF; --inundacao-bg:#FCE4E4; --normal-bg:#E5F2EA;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0D1419; --surface:#152029; --ink:#E6EDF2; --muted:#93A4B1; --line:#26343F;
+    --rio:#4DB3D6; --rio-soft:#123241;
+    --normal:#5CC48A; --atencao:#E9B24E; --alerta:#F2844E; --inundacao:#F26B6B;
+    --atencao-bg:#2E2412; --alerta-bg:#33190F; --inundacao-bg:#361414; --normal-bg:#12291D;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",system-ui,sans-serif}
+a{color:var(--rio)}
+.wrap{max-width:880px;margin:0 auto;padding:0 16px 48px}
+h1,h2,h3{font-family:"Barlow Condensed",sans-serif;letter-spacing:.01em;margin:0}
+.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+header.top{background:var(--rio);color:#fff}
+header.top .wrap{padding:18px 16px 16px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+header.top h1{font-size:34px;font-weight:700;line-height:1}
+header.top p{margin:4px 0 0;opacity:.85;font-size:14px}
+.sos{background:#fff;color:var(--rio);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:6px;font-size:15px;white-space:nowrap}
+.sos b{font-family:"IBM Plex Mono",monospace}
+.aviso-geral{font-size:14px;color:var(--muted);margin:14px 0 0}
+section{margin-top:28px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:4px;margin-bottom:12px}
+.sec-head h2{font-size:22px;font-weight:600;text-transform:uppercase}
+.sec-head small{color:var(--muted);font-size:13px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px}
+.principal{display:grid;grid-template-columns:1fr auto;gap:12px 24px;align-items:end}
+.principal .rotulo{font-family:"Barlow Condensed",sans-serif;font-size:18px;color:var(--muted);text-transform:uppercase}
+.principal .valor{font-size:56px;font-weight:600;line-height:1}
+.principal .valor span{font-size:22px;color:var(--muted);margin-left:4px}
+.selo{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:2px solid currentColor}
+.s-normal{color:var(--normal);background:var(--normal-bg)}
+.s-atencao{color:var(--atencao);background:var(--atencao-bg)}
+.s-alerta{color:var(--alerta);background:var(--alerta-bg)}
+.s-inundacao{color:var(--inundacao);background:var(--inundacao-bg)}
+.s-indisp{color:var(--muted);background:transparent}
+.meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600}
+.regua{grid-column:1/-1;position:relative;height:30px;margin-top:6px}
+.regua .faixa{position:absolute;top:8px;height:10px;border-radius:2px}
+.regua .marca{position:absolute;top:0;width:3px;height:26px;background:var(--ink);border-radius:2px}
+.regua .lbl{position:absolute;top:20px;font-size:11px;color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.velho{grid-column:1/-1;border-left:4px solid var(--alerta);background:var(--alerta-bg);padding:10px 12px;font-size:15px}
+.velho b{color:var(--alerta)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-weight:600;color:var(--muted);text-align:left;font-size:14px;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right}
+td.num{white-space:nowrap}
+.mini{font-size:12px;color:var(--muted);display:block}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:currentColor;vertical-align:1px}
+.lista{list-style:none;margin:0;padding:0}
+.lista li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.lista li:last-child{border-bottom:0}
+.lista .tel{font-family:"IBM Plex Mono",monospace;font-weight:600;white-space:nowrap;text-decoration:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.nota{font-size:13px;color:var(--muted);margin:8px 0 0}
+.erro{color:var(--alerta)}
+footer{margin-top:36px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+@media (max-width:620px){
+  .principal{grid-template-columns:1fr}
+  .principal .valor{font-size:46px}
+  .grid2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div>
+      <h1>CRAVE</h1>
+      <p>Central Regional de Alerta e Verificação de Emergências · Lajeado e Vale do Taquari</p>
+    </div>
+    <a class="sos" href="tel:199">Emergência: Defesa Civil <b>199</b></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="aviso-geral">O CRAVE organiza informação oficial e mostra de onde veio cada número. Não substitui a Defesa Civil: em caso de risco, siga as orientações dela.</p>
+
+  <section>
+    <div class="sec-head"><h2>Rio Taquari em Lajeado</h2><small id="consulta-rio">Consultando a ANA…</small></div>
+    <div class="card principal" id="principal" aria-live="polite">
+      <div><div class="rotulo">Estação Estrela / Lajeado</div><div class="valor num">–</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Rio acima</h2><small>estações a montante de Lajeado</small></div>
+    <div class="card" style="padding:4px 8px">
+      <table>
+        <thead><tr><th>Estação</th><th class="r">Nível</th><th class="r">1 h</th><th>Situação</th></tr></thead>
+        <tbody id="montante"><tr><td colspan="4"><span class="mini">Carregando…</span></td></tr></tbody>
+      </table>
+    </div>
+    <p class="nota" id="nota-cotas"></p>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Avisos de tempo</h2><small id="consulta-avisos"></small></div>
+    <div class="card" id="avisos">Consultando o INMET…</div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="card"><h3>Defesa Civil RS</h3>
+        <ul class="lista">
+          <li><a href="https://www.defesacivil.rs.gov.br/avisos-e-alertas" target="_blank" rel="noopener">Avisos e alertas</a></li>
+          <li><a href="https://defesacivil.rs.gov.br/monitoramento-radar-meteorologico" target="_blank" rel="noopener">Radar meteorológico</a></li>
+          <li><a href="https://redehidrometeorologica.defesacivil.rs.gov.br/Mapa" target="_blank" rel="noopener">Rede hidrometeorológica (mapa)</a></li>
+          <li><a href="https://sosenchentes.rs.gov.br/barragens" target="_blank" rel="noopener">Situação das barragens</a></li>
+        </ul>
+      </div>
+      <div class="card"><h3>Rio, fontes ao vivo</h3>
+        <ul class="lista">
+          <li><a href="https://www.sgb.gov.br/sace/taquari" target="_blank" rel="noopener">SAH Taquari, SGB</a></li>
+          <li><a href="https://sgb.gov.br/sace/taquari/ultimo_boletim.php" target="_blank" rel="noopener">Último boletim do SGB</a></li>
+          <li><a href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener">Avisos do INMET (mapa)</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>BR-386 e pontes</h2><small>sem dado automático</small></div>
+    <div class="card">
+      <p style="margin:0 0 8px">Não existe feed público oficial de bloqueios da BR-386. Antes de sair, confirme direto com a concessionária ou a PRF.</p>
+      <ul class="lista">
+        <li><span>ViaSul (concessionária da BR-386), 0800 e WhatsApp</span><a class="tel" href="tel:08000000290">0800 000 0290</a></li>
+        <li><span>Site da ViaSul</span><a href="https://rodovias.motiva.com.br/viasul/" target="_blank" rel="noopener">rodovias.motiva.com.br/viasul</a></li>
+        <li><span>Polícia Rodoviária Federal</span><a class="tel" href="tel:191">191</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Telefones úteis</h2></div>
+    <div class="card">
+      <ul class="lista">
+        <li><span>Defesa Civil</span><a class="tel" href="tel:199">199</a></li>
+        <li><span>Corpo de Bombeiros</span><a class="tel" href="tel:193">193</a></li>
+        <li><span>Brigada Militar</span><a class="tel" href="tel:190">190</a></li>
+        <li><span>Alertas por SMS: envie seu CEP para</span><a class="tel" href="sms:40199">40199</a></li>
+        <li><span>WhatsApp da Defesa Civil (mande "Oi")</span><a class="tel" href="https://wa.me/556120344611" target="_blank" rel="noopener">(61) 2034-4611</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Como os números são obtidos.</b> Nível e chuva: telemetria da ANA (Agência Nacional de Águas), leituras a cada 15 minutos, consultadas pelo CRAVE a cada 5 minutos. Cotas de atenção, alerta e inundação: SAH Taquari, Serviço Geológico do Brasil. Avisos: INMET. Todo dado mostra o horário da leitura; com mais de 3 horas, o site avisa que está desatualizado.</p>
+    <p>Projeto acadêmico do curso de Processos Gerenciais, IFSul Câmpus Lajeado.</p>
+  </footer>
+</main>
+
+<script>
+const LIMITE_VELHO_MS = 3 * 3600 * 1000;
+const NIVEIS = [
+  ['inundacao','Inundação'],['alerta','Alerta'],['atencao','Atenção'],
+];
+let dadosRio = null;
+
+const m = (cm) => (cm / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const hora = (iso) => new Date(iso).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+function idade(iso) {
+  const ms = Date.now() - new Date(iso).getTime();
+  const min = Math.max(0, Math.round(ms / 60000));
+  if (min < 60) return `há ${min} min`;
+  const h = Math.floor(min / 60);
+  if (h < 48) return `há ${h} h ${min % 60} min`;
+  return `há ${Math.floor(h / 24)} dias`;
+}
+function situacao(e) {
+  if (!e.ok) return { cls: 's-indisp', txt: 'Sem leitura' };
+  for (const [k, txt] of NIVEIS) if (e.nivelCm >= e.cotas[k]) return { cls: 's-' + k, txt };
+  return { cls: 's-normal', txt: 'Abaixo da atenção' };
+}
+const MOTIVOS = {
+  fonte_inacessivel: 'A ANA não respondeu agora.',
+  sem_leitura: 'A estação não enviou leitura nas últimas 24 h.',
+  codigo_divergente: 'A ANA devolveu dados de outra estação; descartados por segurança.',
+};
+const sinal = (v) => v == null ? '–' : (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toLocaleString('pt-BR') + ' cm';
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function regua(e) {
+  // Régua começa abaixo da cota de atenção para as faixas não se espremerem.
+  const span = e.cotas.inundacao - e.cotas.atencao;
+  const lo = Math.max(0, e.cotas.atencao - span * 1.5), hi = e.cotas.inundacao + span * 0.4;
+  const pos = (v) => Math.min(100, Math.max(0, ((v - lo) / (hi - lo)) * 100));
+  const a = pos(e.cotas.atencao), b = pos(e.cotas.alerta), c = pos(e.cotas.inundacao);
+  return `<div class="regua" aria-hidden="true">
+    <div class="faixa" style="left:0;width:${a}%;background:var(--normal)"></div>
+    <div class="faixa" style="left:${a}%;width:${b - a}%;background:var(--atencao)"></div>
+    <div class="faixa" style="left:${b}%;width:${c - b}%;background:var(--alerta)"></div>
+    <div class="faixa" style="left:${c}%;width:${100 - c}%;background:var(--inundacao)"></div>
+    <div class="lbl num" style="left:${a}%">${m(e.cotas.atencao)}</div>
+    <div class="lbl num" style="left:${b}%">${m(e.cotas.alerta)}</div>
+    <div class="lbl num" style="left:${c}%">${m(e.cotas.inundacao)}</div>
+    ${e.ok ? `<div class="marca" style="left:calc(${pos(e.nivelCm)}% - 1px)"></div>` : ''}
+  </div>`;
+}
+
+function renderRio() {
+  if (!dadosRio) return;
+  const est = dadosRio.estacoes;
+  const p = est.find((e) => e.papel === 'principal');
+  const s = situacao(p);
+  const el = document.getElementById('principal');
+  if (!p.ok) {
+    el.innerHTML = `<div><div class="rotulo">Estação ${esc(p.nome)}</div><div class="valor num">–</div></div>
+      <div><span class="selo s-indisp">Sem leitura</span></div>
+      <div class="velho"><b>Não foi possível ler a estação agora.</b> ${MOTIVOS[p.motivo] || ''} Consulte direto o <a href="https://www.sgb.gov.br/sace/taquari" target="_blank" rel="noopener">SAH Taquari (SGB)</a>.</div>`;
+  } else {
+    const velho = Date.now() - new Date(p.leituraEm).getTime() > LIMITE_VELHO_MS;
+    el.innerHTML = `
+      <div><div class="rotulo">Estação ${esc(p.nome)}</div>
+        <div class="valor num">${m(p.nivelCm)}<span>m</span></div></div>
+      <div><span class="selo ${s.cls}">${s.txt}</span></div>
+      ${velho ? `<div class="velho"><b>Dado desatualizado.</b> A última leitura é de ${hora(p.leituraEm)} (${idade(p.leituraEm)}). Confira a fonte ao vivo no <a href="https://www.sgb.gov.br/sace/taquari" target="_blank" rel="noopener">SAH Taquari (SGB)</a>.</div>` : ''}
+      ${regua(p)}
+      <div class="meta">
+        <span>Leitura: <b class="num">${hora(p.leituraEm)}</b> (${idade(p.leituraEm)})</span>
+        <span>Última hora: <b class="num">${sinal(p.variacao1hCm)}</b></span>
+        <span>Chuva 24 h: <b class="num">${p.chuva24hMm == null ? '–' : p.chuva24hMm.toLocaleString('pt-BR') + ' mm'}</b></span>
+        <span>Fonte: <a href="${esc(p.fonteUrl)}" target="_blank" rel="noopener">ANA, estação ${p.codigo}</a></span>
+      </div>`;
+  }
+  document.getElementById('montante').innerHTML = est.filter((e) => e.papel === 'montante').map((e) => {
+    const s = situacao(e);
+    if (!e.ok) return `<tr><td>${esc(e.nome)}<span class="mini">ANA ${e.codigo}</span></td><td colspan="2"><span class="mini">${MOTIVOS[e.motivo] || 'Sem leitura.'}</span></td><td><span class="${s.cls}" style="background:none">${s.txt}</span></td></tr>`;
+    const velho = Date.now() - new Date(e.leituraEm).getTime() > LIMITE_VELHO_MS;
+    return `<tr>
+      <td>${esc(e.nome)}<span class="mini"><a href="${esc(e.fonteUrl)}" target="_blank" rel="noopener">ANA ${e.codigo}</a> · ${hora(e.leituraEm)}${e.chuva24hMm == null ? '' : ' · chuva 24 h ' + e.chuva24hMm.toLocaleString('pt-BR') + ' mm'}${velho ? ' · <span class="erro">desatualizado</span>' : ''}</span></td>
+      <td class="r num">${m(e.nivelCm)} m</td>
+      <td class="r num">${sinal(e.variacao1hCm)}</td>
+      <td><span class="${s.cls}" style="background:none"><span class="dot"></span>${s.txt}</span></td>
+    </tr>`;
+  }).join('');
+  const notas = est.filter((e) => e.nota).map((e) => esc(e.nota));
+  document.getElementById('nota-cotas').innerHTML = notas.join(' ');
+  document.getElementById('consulta-rio').textContent = `consultado ${hora(dadosRio.consultadoEm)}`;
+}
+
+async function carregarRio() {
+  try {
+    const r = await fetch('/api/dados', { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    dadosRio = d;
+    renderRio();
+    renderAvisos({ ...d.avisos, consultadoEm: d.consultadoEm });
+  } catch {
+    document.getElementById('consulta-rio').innerHTML = '<span class="erro">falha ao consultar; tentando de novo</span>';
+    if (!dadosRio) document.getElementById('avisos').innerHTML = `<span class="erro">Não foi possível consultar.</span> Veja em <a href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener">avisos.inmet.gov.br</a>.`;
+    if (!dadosRio) document.getElementById('principal').innerHTML = `<div class="velho"><b>Não foi possível carregar os dados.</b> Consulte direto o <a href="https://www.sgb.gov.br/sace/taquari" target="_blank" rel="noopener">SAH Taquari (SGB)</a>.</div>`;
+  }
+}
+
+function renderAvisos(d) {
+  const el = document.getElementById('avisos');
+  try {
+    document.getElementById('consulta-avisos').textContent = `INMET, consultado ${hora(d.consultadoEm)}`;
+    if (!d.ok) { el.innerHTML = `<span class="erro">O INMET não respondeu agora.</span> Veja os avisos em <a href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener">avisos.inmet.gov.br</a>.`; return; }
+    if (!d.avisos.length) { el.innerHTML = `Nenhum aviso ativo do INMET para Lajeado nesta consulta. <span class="mini">Isso não exclui avisos da Defesa Civil: confira os links abaixo.</span>`; return; }
+    el.innerHTML = '<ul class="lista">' + d.avisos.map((a) => `<li><span><b>${esc(a.descricao || 'Aviso meteorológico do INMET')}</b>${a.severidade ? ' · ' + esc(a.severidade) : ''}<span class="mini">Vigência: ${esc(a.inicio || '?')} até ${esc(a.fim || '?')}</span></span><a href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener">ver no INMET</a></li>`).join('') + '</ul>';
+  } catch {
+    el.innerHTML = `<span class="erro">Falha ao consultar o INMET.</span> Veja em <a href="https://avisos.inmet.gov.br/" target="_blank" rel="noopener">avisos.inmet.gov.br</a>.`;
+  }
+}
+
+carregarRio();
+setInterval(carregarRio, 5 * 60 * 1000);
+setInterval(renderRio, 60 * 1000); // atualiza a idade do dado
+</script>
+</body>
+</html>
