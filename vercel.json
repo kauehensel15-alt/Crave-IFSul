@@ -1,6 +1,0 @@
-{
-  "regions": ["gru1"],
-  "functions": {
-    "api/dados.js": { "maxDuration": 30 }
-  }
-}
